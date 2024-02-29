@@ -6,9 +6,9 @@ import { setSort, selectSort } from "../redux/slices/filterSlice";
 //   pcomposedPath(): Node[];
 // };
 
-type sortItem = {
+export type sortItem = {
   name: string;
-  sortProperty: string;
+  sortProperty: "rating" | "title" | "price" | "-rating" | "-title" | "-price";
 };
 
 export const sortList: sortItem[] = [
