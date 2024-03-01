@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Categories from "../components/Categories";
 import Sort, { sortList } from "../components/Sort";
@@ -13,14 +13,9 @@ import {
   setFilters,
   selectFilter,
 } from "../redux/slices/filterSlice";
-import axios from "axios";
 import qs from "qs";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  setItems,
-  fetchPizzas,
-  selectPizzaData,
-} from "../redux/slices/pizzaSlice";
+import { useNavigate } from "react-router-dom";
+import { fetchPizzas, selectPizzaData } from "../redux/slices/pizzaSlice";
 import { useAppDispatch } from "../redux/store";
 
 const Home: React.FC = () => {
@@ -36,9 +31,10 @@ const Home: React.FC = () => {
 
   // const [isLoading, setIsLoading] = React.useState(true);
 
-  const onChangeCategory = (idx: number) => {
+  const onChangeCategory = React.useCallback((idx: number) => {
     dispatch(setCategoryId(idx));
-  };
+  }, []);
+
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
   };
@@ -111,7 +107,7 @@ const Home: React.FC = () => {
     isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
 
-  const pizzas = items.map((obj: any) => <PizzaBlock {...obj} />);
+  const pizzas = items.map((obj: any) => <PizzaBlock key={obj.id} {...obj} />);
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
   ));
@@ -119,7 +115,7 @@ const Home: React.FC = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort />
+        <Sort value={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === "error" ? (
@@ -129,7 +125,7 @@ const Home: React.FC = () => {
           </h2>
           <p>
             К сожалению, не удалось получить пиццы. Попробуйте аовторить попытку
-            позже. :({" "}
+            позже.
           </p>
         </div>
       ) : (

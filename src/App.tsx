@@ -1,7 +1,4 @@
-import React, { useState } from "react";
 import "./scss/app.scss";
-import { useSelector, useDispatch } from "react-redux";
-
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import FullPizza from "./pages/FullPizza";
@@ -10,7 +7,6 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 
 function App() {
-  const dispatch = useDispatch();
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>

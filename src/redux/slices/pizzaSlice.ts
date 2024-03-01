@@ -60,17 +60,17 @@ const pizzaSlice = createSlice({
       .addCase(fetchPizzas.pending, (state) => {
         state.status = Status.LOADING;
         state.items = [];
-        console.log("Идет отправка...........");
+        // console.log("Идет отправка...........");
       })
       .addCase(fetchPizzas.fulfilled, (state, action) => {
         state.items = action.payload;
         state.status = Status.SUCCES;
-        console.log("ВСЕ ОК !!!!!!!!!!!!");
+        // console.log("ВСЕ ОК !!!!!!!!!!!!");
       })
       .addCase(fetchPizzas.rejected, (state) => {
         state.status = Status.ERROR;
         state.items = [];
-        console.log("ОШИБКА!!!!!!!!!");
+        // console.log("ОШИБКА!!!!!!!!!");
       });
   },
 });

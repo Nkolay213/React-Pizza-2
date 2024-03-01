@@ -1,9 +1,11 @@
 import React from "react";
+import useWhyDidYouUpdate from "ahooks/lib/useWhyDidYouUpdate";
 
 type CategoriesProps = {
   value: number;
-  onChangeCategory: (index: number) => void;
+  onChangeCategory: (idx: number) => void;
 };
+
 const categories = [
   "Все",
   "Мясные",
@@ -12,21 +14,25 @@ const categories = [
   "Острые",
   "Закрытые",
 ];
-const Categories: React.FC<CategoriesProps> = ({ value, onChangeCategory }) => {
-  return (
-    <div className="categories">
-      <ul>
-        {categories.map((categoryName, index) => (
-          <li
-            key={index}
-            onClick={() => onChangeCategory(index)}
-            className={value === index ? "active" : ""}
-          >
-            {categoryName}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+
+const Categories: React.FC<CategoriesProps> = React.memo(
+  ({ value, onChangeCategory }) => {
+    useWhyDidYouUpdate("Categories", { value, onChangeCategory });
+    return (
+      <div className="categories">
+        <ul>
+          {categories.map((categoryName, i) => (
+            <li
+              key={i}
+              onClick={() => onChangeCategory(i)}
+              className={value === i ? "active" : ""}
+            >
+              {categoryName}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+);
 export default Categories;

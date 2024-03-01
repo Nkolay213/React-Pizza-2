@@ -20,9 +20,13 @@ export const sortList: sortItem[] = [
   { name: "алфавиту (ASC)", sortProperty: "-title" },
 ];
 
-function Sort() {
+type SortProps = {
+  value: sortItem;
+};
+
+const Sort: React.FC<SortProps> = React.memo(({ value }) => {
   const dispatch = useDispatch();
-  const sort = useSelector(selectSort);
+  // const sort = useSelector(selectSort);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = React.useState(false);
@@ -61,7 +65,7 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{sort.name}</span>
+        <span onClick={() => setOpen(!open)}>{value.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
@@ -71,7 +75,7 @@ function Sort() {
                 key={i}
                 onClick={() => onClickListItem(obj)}
                 className={
-                  sort.sortProperty === obj.sortProperty ? "active" : ""
+                  value.sortProperty === obj.sortProperty ? "active" : ""
                 }
               >
                 {obj.name}
@@ -82,5 +86,6 @@ function Sort() {
       )}
     </div>
   );
-}
+});
+
 export default Sort;
