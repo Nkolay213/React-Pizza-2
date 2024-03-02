@@ -11,11 +11,13 @@ import {
   setCategoryId,
   setCurrentPage,
   setFilters,
-  selectFilter,
-} from "../redux/slices/filterSlice";
+} from "../redux/filter/slice";
+import { selectFilter } from "../redux/filter/selectors";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
-import { fetchPizzas, selectPizzaData } from "../redux/slices/pizzaSlice";
+import { selectPizzaData } from "../redux/pizza/selectors";
+import { fetchPizzas } from "../redux/pizza/asyncActions";
+
 import { useAppDispatch } from "../redux/store";
 
 const Home: React.FC = () => {

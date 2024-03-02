@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setSort, selectSort } from "../redux/slices/filterSlice";
+import { setSort } from "../redux/filter/slice";
+import { selectSort } from "../redux/filter/selectors";
 
 // type PopupClick = React.MouseEvent<HTMLBodyElement> & {
 //   pcomposedPath(): Node[];
