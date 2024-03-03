@@ -1,8 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
-import { RootState } from "../store";
-// import { cartItem } from "";
-import { Pizza, SearchPizzaParams, Status } from "./types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Pizza, Status } from "./types";
 import { fetchPizzas } from "./asyncActions";
 
 interface pizzaSliceState {
